@@ -10,7 +10,7 @@
 $hotkey        = "{F9}"             # Hotkey for OBS
 $release       = 30                 # Seconds to press the hotkey again
 $channel       = "yourchannelname"  # Name of your channel
-$webserverport = "8083"             # Local port for temporarly webserver (must match with OAuth Redirect URL - eg. http://127.0.0.1:8084)
+$webserverport = "8082"             # Local port for temporarly webserver (must match with OAuth Redirect URL - eg. http://127.0.0.1:8084)
 $webserverwait = 60                 # Seconds; How long should the webserver listen to oauth request
 $interval      = 2                  # Time between requests to twitch for checking the lastest follower
 $pattern       = @("^hos(s|t).*",".*0312.*") # Regex against horst
@@ -32,11 +32,11 @@ function init_main {
     init_clientid
     init_token
     init_channelid
-    #while($true) {
+    while($true) {
         init_follower
         init_detector
         sleep($Global:interval)
-    #}
+    }
 }
 
 function show_welcome {
