@@ -19,7 +19,7 @@ $pattern      += "^hos(s|t).*"      # Regular expression of a bad follower
 $pattern      += ".*0312.*"         # Regular expression of a bad follower
 
 
-# Runtime vars - Modified by the process - Should you not edit
+# Runtime vars - Modified by the process - Should you NOT edit
 $clientid     = ""                     # Your extention client id
 $token        = ""                     # Your current authentication token or secret
 $basedir      = ($PSScriptRoot + "\")  # Current path of your script
@@ -37,6 +37,7 @@ function init_main {
     echo.
     echo.
     while($true) {
+    	write-host "." -nonewline
         init_follower
         init_detector
         sleep($Global:interval)
