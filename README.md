@@ -18,6 +18,8 @@ After a defined time the hotkey will be pressed again to activate the source aga
   - Modify '8082' in the line '$webserverport = "8082"' if an application uses the Network TCP Port 8082  on your computer (if you are not sure leave it)
   - Modify '2' in the line '$interval = 2' if you want to audjust the update time in seconds of your followers ('2' means that you followers will be checked every 2 seconds)
   - Modify the array in the line '$pattern = @("^hos(s|t).*",".*0312.*")' to add other or more regular expressions. Shoud a expression matches to a follower then the hotkeys will be pressed.
+    - If you are satisfied just by disable Hoss follows you can leave it as it is
+    - A good source for regex tests is regex101.com
 - Start the init.cmd and follow the "instructions"
   - When you first run the init.cmd you will be redirected to dev.twitch.tv with your default browser
     - You have to create a new extention
