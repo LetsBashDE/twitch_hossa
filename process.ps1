@@ -8,9 +8,7 @@
 
 
 # User vars - Can be edited by YOU
-$hotkey        = "{F9}"             # Hotkey for OBS
 $release       = 30                 # Seconds to press the hotkey again
-$channel       = "yourchannelname"  # Name of your channel
 $webserverport = "8082"             # Local port for temporarly webserver (must match with OAuth Redirect URL - eg. http://127.0.0.1:8084)
 $webserverwait = 60                 # Seconds; How long should the webserver listen to oauth request
 $interval      = 2                  # Time between requests to twitch for checking the lastest follower
@@ -20,7 +18,9 @@ $pattern      += ".*0312.*"         # Regular expression of a bad follower
 
 
 # Runtime vars - Modified by the process - Should you NOT edit
+$hotkey       = ""                     # Hotkey for OBS
 $clientid     = ""                     # Your extention client id
+$channel      = ""                     # Name of your channel
 $token        = ""                     # Your current authentication token or secret
 $basedir      = ($PSScriptRoot + "\")  # Current path of your script
 $channelid    = ""                     # Your channelid extracted by your provided channel- oder username
@@ -30,6 +30,7 @@ $matchfollow  = ""                     # Compare value for change detection
 
 function init_main {
     show_welcome
+    init_hotkey
     init_channel
     init_clientid
     init_token
@@ -57,6 +58,33 @@ function show_welcome {
     write-host "How it works:"
     write-host ("This script connects continuously to your twitch account and retrive the lastest follower. If you latest follower is somehow named hoss then a local keypress '"+$Global:hotkey+"' will be issued to hide your alertbox overlay in OBS Studio. After about 20 seconds the key will be pressed again to show the alertbox as usual.")
     write-host ""
+}
+
+function init_hotkey {
+    # Create filepath string for channel
+    $path = ($Global:basedir + "hotkey.txt")
+
+    # Read filepath string if pressent
+    if(test-path -path $path){
+        $Global:hotkey = get-content -path $path
+    }
+    
+    # Request hotkey until value is not empty
+    while(($Global:hotkey).Length -eq 0) {
+        $Global:hotkey = Read-Host -Prompt "What would you use as your hotkey (eg. F9)"
+
+        # Throw error if still empty
+        if(($Global:hotkey).Length -eq 0){
+            write-host "Warning: Hotkey is empty!"
+            write-host "         Please try again..."
+        }
+
+        # Add space to next output
+        write-host ""
+    }
+
+    # Save to disk
+    $Global:hotkey | Out-File -FilePath $path -NoNewline
 }
 
 function init_channel{
@@ -103,8 +131,8 @@ function init_clientid {
 
         # Open default browser and redirect client to twitch dev page and request client id for input
         start-process "https://dev.twitch.tv/console"
-        write-host "Please create a new extention and provide the corrosponding client id to the input field below."
-        $Global:clientid = Read-Host -Prompt "Client ID"
+        write-host ("Please create a new extention with the OAuth Redirect URL 'http://127.0.0.1:"+webserverport+"'")
+        $Global:clientid = Read-Host -Prompt "Client ID of the new Extention"
 
         # Throw error if still empty
         if(($Global:clientid).Length -eq 0){
@@ -301,11 +329,11 @@ function init_detector {
 
         if(($Global:latestfollow) -match $expression) {
             write-host ("Follower "+$Global:latestfollow+" looks like a bad guy!") -ForegroundColor Yellow
-	    [System.Windows.Forms.SendKeys]::SendWait($Global:hotkey)
+	    [System.Windows.Forms.SendKeys]::SendWait(("{"+$Global:hotkey+"}"))
             write-host ("Action: Hotkey "+$Global:hotkey+" pressed") -ForegroundColor Cyan
 	    write-host ("Wait "+$Global:release+" seconds for release") -ForegroundColor Cyan
             sleep($Global:release)
-            [System.Windows.Forms.SendKeys]::SendWait($Global:hotkey)
+            [System.Windows.Forms.SendKeys]::SendWait(("{"+$Global:hotkey+"}"))
             write-host ("Action: Hotkey "+$Global:hotkey+" pressed") -ForegroundColor Cyan
         }
 
