@@ -6,6 +6,7 @@
 # Works best with OBS & Streamlabs
 # 
 
+
 # User vars - Can be edited by YOU
 $hotkey        = "{F9}"             # Hotkey for OBS
 $release       = 30                 # Seconds to press the hotkey again
@@ -13,8 +14,9 @@ $channel       = "yourchannelname"  # Name of your channel
 $webserverport = "8082"             # Local port for temporarly webserver (must match with OAuth Redirect URL - eg. http://127.0.0.1:8084)
 $webserverwait = 60                 # Seconds; How long should the webserver listen to oauth request
 $interval      = 2                  # Time between requests to twitch for checking the lastest follower
-$pattern       = @("^hos(s|t).*",".*0312.*") # Regex against horst
-
+$pattern       = @()                # Do not modify
+$pattern      += "^hos(s|t).*"      # Regular expression of a bad follower
+$pattern      += ".*0312.*"         # Regular expression of a bad follower
 
 
 # Runtime vars - Modified by the process - Should you not edit
@@ -24,6 +26,7 @@ $basedir      = ($PSScriptRoot + "\")  # Current path of your script
 $channelid    = ""                     # Your channelid extracted by your provided channel- oder username
 $latestfollow = ""                     # Your lastest follower on twitch
 $matchfollow  = ""                     # Compare value for change detection
+
 
 function init_main {
     show_welcome
