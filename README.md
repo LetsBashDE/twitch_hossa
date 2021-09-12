@@ -1,4 +1,4 @@
-# Whats This
+# Whats is this
 Some time ago the Bot Hoss00312 started to get on my nerves.
 Therefore I created a simple Powershell Script that works with the Twitch Helix API.
 Of cause it is Powershell - so it just works with Windows and I do not plan to port this script.
