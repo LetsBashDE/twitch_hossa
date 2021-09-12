@@ -1,6 +1,6 @@
 #
 # Hossa by LetsBash.de
-# 11.09.2021
+# 13.09.2021
 # --------------------
 # Function: Makes Hoss00312 Follower silent by hotkey
 # Works best with OBS & Streamlabs
