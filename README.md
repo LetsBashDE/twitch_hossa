@@ -9,11 +9,11 @@ expression matches to the user then a hotkey will be pressed by the script to hi
 After a defined time the hotkey will be pressed again to activate the source again.
 
 # How it runs...
-- You need to have 2 factor/mfa authentication enabled on your Twitch account. (All Affiliate should have this)
+- You need to have 2 factor/mfa authentication enabled on your Twitch account. (All Affiliate should have this already)
 - Place the init.cmd and process.ps1 into the same directory of your choice.
 - Open the process.ps1 in an editor of your choice
   - Replace 'F9' in the line '$hotkey = "{F9}"' with a Hotkey of your choice (you can also leave 'F9' if you are fine with it)
-  - Replace '30' in the line '$release = 30' with the amount of seconds until the hotkey should be pressed again to enable your Alertbox.
+  - Replace '30' in the line '$release = 30' with the amount of seconds until the hotkey should be pressed again to re-enable your Alertbox.
   - Replace 'yourchannelname' in the line '$channel = "yourchannelname"' with the name of your twitch channel (please use lower case)
   - Modify '8082' in the line '$webserverport = "8082"' if an application uses the Network TCP Port 8082  on your computer (if you are not sure leave it)
   - Modify '2' in the line '$interval = 2' if you want to audjust the update time in seconds of your followers ('2' means that you followers will be checked every 2 seconds)
