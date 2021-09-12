@@ -21,7 +21,6 @@ $pattern       = @("^hos(s|t).*",".*0312.*") # Regex against horst
 $clientid     = ""                     # Your extention client id
 $token        = ""                     # Your current authentication token or secret
 $basedir      = ($PSScriptRoot + "\")  # Current path of your script
-#$context      = ""                    # 
 $channelid    = ""                     # Your channelid extracted by your provided channel- oder username
 $latestfollow = ""                     # Your lastest follower on twitch
 $matchfollow  = ""                     # Compare value for change detection
