@@ -71,7 +71,7 @@ function init_hotkey {
     
     # Request hotkey until value is not empty
     while(($Global:hotkey).Length -eq 0) {
-        $Global:hotkey = Read-Host -Prompt "What 'F' Key shoud be your hotkey (9 for F9)"
+        $Global:hotkey = Read-Host -Prompt "What 'F' Key shoud be used as your hotkey (9 for F9)"
 
         # Throw error if still empty
         if(($Global:hotkey).Length -eq 0){
@@ -241,6 +241,7 @@ function init_destroy_token {
 function init_destroy_channel {
 
     del ($Global:basedir + "channel.txt")
+    del ($Global:basedir + "clientid.txt")
     write-host "Error: Channel seams to be invalid. Please restart application and reenter your channelname."
 
 }
