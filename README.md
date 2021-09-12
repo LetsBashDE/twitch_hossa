@@ -39,7 +39,7 @@ After a defined time the hotkey will be pressed again to activate the source aga
 If something goes wrong you can delete the channel.txt, clientid.txt and token.txt files that will be placed in the same directory as init.cmd and process.ps1.
 
 # License
-You are free to use this code and modify it by your own, but I would love to see a credit on it.
+You are free to use this code and modify it by your own, but a credit to LetsBash.de must be included.
 
 # Warranty
 This script does not come with any warranty and will be provided as it is.
