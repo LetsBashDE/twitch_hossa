@@ -10,7 +10,7 @@
 $hotkey        = "{F9}"             # Hotkey for OBS
 $release       = 30                 # Seconds to press the hotkey again
 $channel       = "yourchannelname"  # Name of your channel
-$webserverport = "8082'             # Local port for temporarly webserver (must match with OAuth Redirect URL - eg. http://127.0.0.1:8084)
+$webserverport = "8083"             # Local port for temporarly webserver (must match with OAuth Redirect URL - eg. http://127.0.0.1:8084)
 $webserverwait = 60                 # Seconds; How long should the webserver listen to oauth request
 $interval      = 2                  # Time between requests to twitch for checking the lastest follower
 $pattern       = @("^hos(s|t).*",".*0312.*") # Regex against horst
@@ -173,7 +173,7 @@ function init_token {
         # Prepare emergengy stop with delay
         if ($context.Request.HttpMethod -eq 'GET' -and $context.Request.RawUrl -like '/emergency/') {
             echo "Request 1 Completed"
-            [string]$html = ("<html><head><meta http-equiv=`"refresh`" content=`""+$webserverwait+"; URL='http://127.0.0.1:"+$Global:webserverport+"/close/`"></head><body><center><h1>Weiterleitung erfolgt in kürze</h1></center></body><html>")
+            [string]$html = ("<html><head><meta http-equiv=`"refresh`" content=`""+$webserverwait+"; URL='http://127.0.0.1:"+$Global:webserverport+"/close/`"></head><body><center><h1>Weiterleitung erfolgt in kÃ¼rze</h1></center></body><html>")
             $buffer = [System.Text.Encoding]::UTF8.GetBytes($html)
             $context.Response.ContentLength64 = $buffer.Length
             $context.Response.OutputStream.Write($buffer, 0, $buffer.Length)
