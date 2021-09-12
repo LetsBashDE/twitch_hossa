@@ -71,7 +71,7 @@ function init_hotkey {
     
     # Request hotkey until value is not empty
     while(($Global:hotkey).Length -eq 0) {
-        $Global:hotkey = Read-Host -Prompt "What would you use as your hotkey (eg. F9)"
+        $Global:hotkey = Read-Host -Prompt "What 'F' Key shoud be your hotkey (9 for F9)"
 
         # Throw error if still empty
         if(($Global:hotkey).Length -eq 0){
