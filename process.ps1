@@ -177,7 +177,7 @@ function init_token {
 
         # Request one: First time response from twitch
         if ($context.Request.HttpMethod -eq 'GET' -and $context.Request.RawUrl -eq '/') {
-            echo "Webserver: Try to catch Twitch token"
+            echo "Webserver: Catch Twitch token"
             [string]$html = ("<script>var z = (((window.location.href).split('access_token='))[1].split('&scope'))[0]; window.location.replace(('http://127.0.0.1:"+$Global:webserverport+"/x/'+z))</script>")
             $buffer = [System.Text.Encoding]::UTF8.GetBytes($html)
             $context.Response.ContentLength64 = $buffer.Length
@@ -187,7 +187,7 @@ function init_token {
 
         # Request two: Javascript corrected response
         if ($context.Request.HttpMethod -eq 'GET' -and $context.Request.RawUrl -like '/x/*') {
-            echo "Webserver: Try to store Twitch token"
+            echo "Webserver: Storing Twitch token"
             [string]$html = "<html><body><center><br><br><br><br><h1><font face='arial'>Bashys Twitch Authentication Helper</font></h1><h2><font face='arial'>Powerd by <a href='https://letsbash.de' target='_blank'>LetsBash.de</a></font></h2><h3><font face='arial'>You can close this window now</font></h3></center></body></html>"
             $buffer = [System.Text.Encoding]::UTF8.GetBytes($html)
             $context.Response.ContentLength64 = $buffer.Length
