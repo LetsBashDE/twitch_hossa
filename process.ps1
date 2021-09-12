@@ -221,7 +221,7 @@ function init_kill {
 
 
 function init_channelid {
-    $url = "https://api.twitch.tv/helix/users?login=letsbashde"
+    $url = ("https://api.twitch.tv/helix/users?login="+$Global:channel
 	$webquery = New-Object -ComObject "Msxml2.ServerXMLHTTP.6.0"
     $webquery.SetOption(2, 'objHTTP.GetOption(2) - SXH_SERVER_CERT_IGNORE_ALL_SERVER_ERRORS')
     $webquery.open('GET', $url, $false)
