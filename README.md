@@ -35,7 +35,7 @@ After a defined time the hotkey will be pressed again to activate the source aga
 - Setup your Alertbox with a delay of 5 seconds
   - On Streamlabs you can change this on the website for every alert
 
-# When it failes
+# When it failes or start fresh
 If something goes wrong you can delete the channel.txt, clientid.txt and token.txt files that will be placed in the same directory as init.cmd and process.ps1.
 
 # License
