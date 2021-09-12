@@ -30,9 +30,14 @@ After a defined time the hotkey will be pressed again to activate the source aga
     - In the background a second website opens: This is a failsave to close the local webserver that is running on your defined TCP Port (eg. 8082)
     - Therefore: You have 60 seconds to accept the twitch oauth page to retrive the token and gain access to your follower list
 - Next time you run the init.cmd all settings will be loaded automaticly
+- Setup your Alertbox with a delay of 5 seconds
+  - On Streamlabs you can change this on the website for every alert
 
 # When it failes
 If something goes wrong you can delete the channel.txt, clientid.txt and token.txt files that will be placed in the same directory as init.cmd and process.ps1.
 
 # License
 You are free to use this code and modify it by your own, but I would love to see a credit on it.
+
+# Warranty
+This script does not come with any warranty and will be provided as it is.
