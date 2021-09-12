@@ -131,7 +131,7 @@ function init_clientid {
 
         # Open default browser and redirect client to twitch dev page and request client id for input
         start-process "https://dev.twitch.tv/console"
-        write-host ("Please create a new extention with the OAuth Redirect URL 'http://127.0.0.1:"+webserverport+"'")
+        write-host ("Please create a new extention with the OAuth Redirect URL 'http://127.0.0.1:"+$Global:webserverport+"'")
         $Global:clientid = Read-Host -Prompt "Client ID of the new Extention"
 
         # Throw error if still empty
