@@ -56,7 +56,7 @@ function show_welcome {
     write-host "------------------------------------"
     write-host ""
     write-host "How it works:"
-    write-host ("This script connects continuously to your twitch account and retrive the lastest follower. If you latest follower is somehow named hoss then a local keypress '"+$Global:hotkey+"' will be issued to hide your alertbox overlay in OBS Studio. After about 20 seconds the key will be pressed again to show the alertbox as usual.")
+    write-host ("This script connects continuously to your twitch account and retrive the lastest follower. If you latest follower is somehow named hoss then a hotkey keypress will be issued to hide your alertbox overlay in OBS Studio. After a delay the hotkey will be pressed again to show the alertbox as usual.")
     write-host ""
 }
 
@@ -99,8 +99,7 @@ function init_channel{
 
     # Request clientid until value is not empty
     while(($Global:channel).Length -eq 0) {
-        write-host "Please provide your twitch channel or username."
-        $Global:channel = Read-Host -Prompt "Your channel"
+        $Global:channel = Read-Host -Prompt "What is your Twitch channel name (eg. LetsBashDE)"
 
         # Throw error if still empty
         if(($Global:channel).Length -eq 0){
@@ -329,11 +328,11 @@ function init_detector {
 
         if(($Global:latestfollow) -match $expression) {
             write-host ("Follower "+$Global:latestfollow+" looks like a bad guy!") -ForegroundColor Yellow
-	    [System.Windows.Forms.SendKeys]::SendWait(("{"+$Global:hotkey+"}"))
+	    [System.Windows.Forms.SendKeys]::SendWait(("{F"+$Global:hotkey+"}"))
             write-host ("Action: Hotkey "+$Global:hotkey+" pressed") -ForegroundColor Cyan
 	    write-host ("Wait "+$Global:release+" seconds for release") -ForegroundColor Cyan
             sleep($Global:release)
-            [System.Windows.Forms.SendKeys]::SendWait(("{"+$Global:hotkey+"}"))
+            [System.Windows.Forms.SendKeys]::SendWait(("{F"+$Global:hotkey+"}"))
             write-host ("Action: Hotkey "+$Global:hotkey+" pressed") -ForegroundColor Cyan
         }
 
