@@ -28,6 +28,9 @@ $latestfollow = ""                           # Your lastest follower on twitch
 $matchfollow  = ""                           # Compare value for change detection
 
 
+# Load Assemblys once
+Add-Type -AssemblyName System.Windows.Forms
+
 function init_main {
     show_welcome
     init_hotkey
