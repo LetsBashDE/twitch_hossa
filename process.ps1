@@ -34,8 +34,10 @@ function init_main {
     init_clientid
     init_token
     init_channelid
-    echo.
-    echo.
+    write-host ""
+    write-host ""
+    write-host "Start looking for followers..."
+    write-host ""
     while($true) {
     	write-host "." -nonewline
         init_follower
