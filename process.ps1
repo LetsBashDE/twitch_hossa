@@ -8,24 +8,24 @@
 
 
 # User vars - Can be edited by YOU
-$release       = 30                 # Seconds to press the hotkey again
-$webserverport = "8082"             # Local port for temporarly webserver (must match with OAuth Redirect URL - eg. http://127.0.0.1:8084)
-$webserverwait = 60                 # Seconds; How long should the webserver listen to oauth request
-$interval      = 2                  # Time between requests to twitch for checking the lastest follower
-$pattern       = @()                # Do not modify
-$pattern      += "^hos(s|t).*"      # Regular expression of a bad follower
-$pattern      += ".*0312.*"         # Regular expression of a bad follower
+$release       = 60                          # Seconds to press the hotkey again
+$webserverport = "8082"                      # Local port for temporarly webserver (must match with OAuth Redirect URL - eg. http://127.0.0.1:8084)
+$webserverwait = 60                          # Seconds; How long should the webserver listen to oauth request
+$interval      = 2                           # Time between requests to twitch for checking the lastest follower
+$pattern       = @()                         # Do not modify
+$pattern      += ".*(h|H)(o|O)(s|S)(s|S).*"  # Regular expression of a bad follower
+$pattern      += ".*0312.*"                  # Regular expression of a bad follower
 
 
 # Runtime vars - Modified by the process - Should you NOT edit
-$hotkey       = ""                     # Hotkey for OBS
-$clientid     = ""                     # Your extention client id
-$channel      = ""                     # Name of your channel
-$token        = ""                     # Your current authentication token or secret
-$basedir      = ($PSScriptRoot + "\")  # Current path of your script
-$channelid    = ""                     # Your channelid extracted by your provided channel- oder username
-$latestfollow = ""                     # Your lastest follower on twitch
-$matchfollow  = ""                     # Compare value for change detection
+$hotkey       = ""                           # Hotkey for OBS
+$clientid     = ""                           # Your extention client id
+$channel      = ""                           # Name of your channel
+$token        = ""                           # Your current authentication token or secret
+$basedir      = ($PSScriptRoot + "\")        # Current path of your script
+$channelid    = ""                           # Your channelid extracted by your provided channel- oder username
+$latestfollow = ""                           # Your lastest follower on twitch
+$matchfollow  = ""                           # Compare value for change detection
 
 
 function init_main {
@@ -35,14 +35,23 @@ function init_main {
     init_clientid
     init_token
     init_channelid
+    
+    # Enter processing state
     write-host ""
     write-host ""
     write-host "Start looking for followers..."
     write-host ""
+    
     while($true) {
+    
+    	# Show progress
     	write-host "." -nonewline
+	
+	# Check latest follower
         init_follower
         init_detector
+	
+	# Let the CPU rest
         sleep($Global:interval)
     }
 }
@@ -319,6 +328,7 @@ function init_detector {
         return
     }
     
+    # Show information if change has been detected
     write-host ""
     write-host ("Latest follower changed: "+$Global:latestfollow)
 
@@ -327,6 +337,7 @@ function init_detector {
 
     foreach($expression in $Global:pattern){
 
+	# Commence action if bad guy has been detected
         if(($Global:latestfollow) -match $expression) {
             write-host ("Follower "+$Global:latestfollow+" looks like a bad guy!") -ForegroundColor Yellow
 	    [System.Windows.Forms.SendKeys]::SendWait(("{F"+$Global:hotkey+"}"))
