@@ -34,6 +34,8 @@ function init_main {
     init_clientid
     init_token
     init_channelid
+    echo.
+    echo.
     while($true) {
         init_follower
         init_detector
@@ -145,7 +147,7 @@ function init_token {
 
         # Request one: First time response from twitch
         if ($context.Request.HttpMethod -eq 'GET' -and $context.Request.RawUrl -eq '/') {
-            echo "Request 1 Completed"
+            echo "Webserver: Try to catch Twitch token"
             [string]$html = ("<script>var z = (((window.location.href).split('access_token='))[1].split('&scope'))[0]; window.location.replace(('http://127.0.0.1:"+$Global:webserverport+"/x/'+z))</script>")
             $buffer = [System.Text.Encoding]::UTF8.GetBytes($html)
             $context.Response.ContentLength64 = $buffer.Length
@@ -155,8 +157,8 @@ function init_token {
 
         # Request two: Javascript corrected response
         if ($context.Request.HttpMethod -eq 'GET' -and $context.Request.RawUrl -like '/x/*') {
-            echo "Request 2 Completed"
-            [string]$html = "<html><body><center><br><br><br><br><h1><font face='arial'>Bashys Twitch Authentication Helper</font></h1><h2><font face='arial'>Powerd by <a href='https://letsbash.de' target='_blank'>LetsBash.de</a></font></h2><h3><font face='arial'>You can close this window now</font></h3><h4><font face='arial'>Machs Fenster zu - es zieht! ;)</font></h4></center></body></html>"
+            echo "Webserver: Try to store Twitch token"
+            [string]$html = "<html><body><center><br><br><br><br><h1><font face='arial'>Bashys Twitch Authentication Helper</font></h1><h2><font face='arial'>Powerd by <a href='https://letsbash.de' target='_blank'>LetsBash.de</a></font></h2><h3><font face='arial'>You can close this window now</font></h3></center></body></html>"
             $buffer = [System.Text.Encoding]::UTF8.GetBytes($html)
             $context.Response.ContentLength64 = $buffer.Length
             $context.Response.OutputStream.Write($buffer, 0, $buffer.Length)
@@ -174,8 +176,8 @@ function init_token {
 
         # Prepare emergengy stop with delay
         if ($context.Request.HttpMethod -eq 'GET' -and $context.Request.RawUrl -like '/emergency/') {
-            echo "Request 1 Completed"
-            [string]$html = ("<html><head><meta http-equiv=`"refresh`" content=`""+$webserverwait+"; URL='http://127.0.0.1:"+$Global:webserverport+"/close/`"></head><body><center><h1>Weiterleitung erfolgt in kürze</h1></center></body><html>")
+            echo "Webserver: Emergency shutdown timer [Enabled]"
+            [string]$html = ("<html><head><meta http-equiv=`"refresh`" content=`""+$webserverwait+"; URL='http://127.0.0.1:"+$Global:webserverport+"/close/'`"></head><body><center><h1><a href='http://127.0.0.1:"+$Global:webserverport+"/close/'>Emergency Webserver Shutdown</a></h1></center></body><html>")
             $buffer = [System.Text.Encoding]::UTF8.GetBytes($html)
             $context.Response.ContentLength64 = $buffer.Length
             $context.Response.OutputStream.Write($buffer, 0, $buffer.Length)
@@ -184,8 +186,8 @@ function init_token {
 
         # Site for emergengy listener stop
         if ($context.Request.HttpMethod -eq 'GET' -and $context.Request.RawUrl -like '/close/') {
-            echo "Request 1 Completed"
-            [string]$html = ("<html><body><h1>Notice</h1><h2>The local Webserver has been shutdown due to the timeout value of webserverwait</h2></body></html>")
+            echo "Webserver: Emergency shutdown [Completed]"
+            [string]$html = ("<html><body><h1>Notice</h1><h2>Local Webserver has been shutdown</h2></body></html>")
             $buffer = [System.Text.Encoding]::UTF8.GetBytes($html)
             $context.Response.ContentLength64 = $buffer.Length
             $context.Response.OutputStream.Write($buffer, 0, $buffer.Length)
@@ -285,6 +287,9 @@ function init_detector {
     if($Global:matchfollow -eq $Global:latestfollow){
         return
     }
+    
+    write-host ""
+    write-host ("Latest follower changed: "+$Global:latestfollow)
 
     # Remember the new follower on next matchmaking
     $Global:matchfollow = $Global:latestfollow
@@ -294,13 +299,16 @@ function init_detector {
         if(($Global:latestfollow) -match $expression) {
             write-host ("Follower "+$Global:latestfollow+" looks like a bad guy!") -ForegroundColor Yellow
 	    [System.Windows.Forms.SendKeys]::SendWait($Global:hotkey)
-            write-host ("HOTKEY PRESSED") -ForegroundColor Cyan
+            write-host ("Action: Hotkey "+$Global:hotkey+" pressed") -ForegroundColor Cyan
+	    write-host ("Wait "+$Global:release+" seconds for release") -ForegroundColor Cyan
             sleep($Global:release)
             [System.Windows.Forms.SendKeys]::SendWait($Global:hotkey)
-            write-host ("HOTKEY PRESSED") -ForegroundColor Cyan
+            write-host ("Action: Hotkey "+$Global:hotkey+" pressed") -ForegroundColor Cyan
         }
 
     }
+    
+    write-host ""
 
 }
 
