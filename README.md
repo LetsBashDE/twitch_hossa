@@ -11,7 +11,7 @@ After a defined time the hotkey will be pressed again to activate the source aga
 # Requirements
 Just Windows. Works maybe from Windows 7 up to Windows 11 - Tested with Windows 10.
 
-# How it runs...
+# How to run
 - You need to have 2 factor/mfa authentication enabled on your Twitch account. (All Affiliate should have this already)
 - Place the init.cmd and process.ps1 into the same directory of your choice.
 - Open the process.ps1 in an editor of your choice
