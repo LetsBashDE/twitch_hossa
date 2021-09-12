@@ -45,4 +45,4 @@ You are free to use this code and modify it by your own, but I would love to see
 This script does not come with any warranty and will be provided as it is.
 
 # Is this dangerous?
-Nope - Everything regarding processing and authentication will be handeld between your computer and twitch. But you should store the script on a public folder.
+Nope - Everything regarding processing and authentication will be handeld between your computer and twitch. But you should not store the script on a public folder.
