@@ -38,6 +38,7 @@ function init_main {
     init_clientid
     init_token
     init_channelid
+    init_testing
     
     # Enter processing state
     write-host ""
@@ -70,6 +71,31 @@ function show_welcome {
     write-host "How it works:"
     write-host ("This script connects continuously to your twitch account and retrive the lastest follower. If you latest follower is somehow named hoss then a hotkey keypress will be issued to hide your alertbox overlay in OBS Studio. After a delay the hotkey will be pressed again to show the alertbox as usual.")
     write-host ""
+}
+
+function init_testing {
+
+    # Testing hotkeys by pressing 6 times
+    write-host ""
+    write-host ("Testing Hotkey...")
+    [System.Windows.Forms.SendKeys]::SendWait(("{F"+$Global:hotkey+"}"))
+    write-host ("        pressed 1 times")
+    sleep(1)
+    [System.Windows.Forms.SendKeys]::SendWait(("{F"+$Global:hotkey+"}"))
+    write-host ("        pressed 2 times")
+    sleep(1)
+    [System.Windows.Forms.SendKeys]::SendWait(("{F"+$Global:hotkey+"}"))
+    write-host ("        pressed 3 times")
+    sleep(1)
+    [System.Windows.Forms.SendKeys]::SendWait(("{F"+$Global:hotkey+"}"))
+    write-host ("        pressed 4 times")
+    sleep(1)
+    [System.Windows.Forms.SendKeys]::SendWait(("{F"+$Global:hotkey+"}"))
+    write-host ("        pressed 5 times")
+    sleep(1)
+    [System.Windows.Forms.SendKeys]::SendWait(("{F"+$Global:hotkey+"}"))
+    write-host ("        pressed 6 times")
+    write-host ("Testing Hotkey done")
 }
 
 function init_hotkey {
