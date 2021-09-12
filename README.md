@@ -9,7 +9,7 @@ expression matches to the user then a hotkey will be pressed by the script to hi
 After a defined time the hotkey will be pressed again to activate the source again.
 
 # How it runs...
-- You need to have 2 Factor authentication enabled on your Twitch account. (All Affiliate should have this)
+- You need to have 2 factor/mfa authentication enabled on your Twitch account. (All Affiliate should have this)
 - Place the init.cmd and process.ps1 into the same directory of your choice.
 - Open the process.ps1 in an editor of your choice
   - Replace 'F9' in the line '$hotkey = "{F9}"' with a Hotkey of your choice (you can also leave 'F9' if you are fine with it)
