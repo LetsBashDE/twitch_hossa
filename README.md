@@ -38,6 +38,9 @@ After a defined time the hotkey will be pressed again to activate the source aga
 # When it failes or start fresh
 If something goes wrong you can delete the channel.txt, clientid.txt and token.txt files that will be placed in the same directory as init.cmd and process.ps1.
 
+# Things you should not do
+You must not run this as an Administrator because of the path "execute in" definition of windows. Programms that will be run as Administrator starts usualy at %winwir%\system32.
+
 # License
 You are free to use this code and modify it by your own, but a credit to LetsBash.de must be included.
 
