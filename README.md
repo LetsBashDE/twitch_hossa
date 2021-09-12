@@ -8,6 +8,9 @@ Basicly the Script is checking continuesly the latest follower of your channel a
 expression matches to the user then a hotkey will be pressed by the script to hide your notification source in OBS.
 After a defined time the hotkey will be pressed again to activate the source again.
 
+# Requirements
+Just Windows! Tested with Windows 10.
+
 # How it runs...
 - You need to have 2 factor/mfa authentication enabled on your Twitch account. (All Affiliate should have this already)
 - Place the init.cmd and process.ps1 into the same directory of your choice.
