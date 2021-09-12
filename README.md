@@ -9,7 +9,7 @@ expression matches to the user then a hotkey will be pressed by the script to hi
 After a defined time the hotkey will be pressed again to activate the source again.
 
 # Requirements
-Just Windows! Tested with Windows 10.
+Just Windows. Works maybe from Windows 7 up to Windows 11 - Tested with Windows 10.
 
 # How it runs...
 - You need to have 2 factor/mfa authentication enabled on your Twitch account. (All Affiliate should have this already)
