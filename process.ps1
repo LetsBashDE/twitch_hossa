@@ -290,11 +290,10 @@ function init_detector {
 
         if(($Global:latestfollow) -match $expression) {
             write-host ("Follower "+$Global:latestfollow+" looks like a bad guy!") -ForegroundColor Yellow
-            $wshell = New-Object -ComObject wscript.shell;
-            $wshell.SendKeys($Global:hotkey)
+	    [System.Windows.Forms.SendKeys]::SendWait($Global:hotkey)
             write-host ("HOTKEY PRESSED") -ForegroundColor Cyan
             sleep($Global:release)
-            $wshell.SendKeys($Global:hotkey)
+            [System.Windows.Forms.SendKeys]::SendWait($Global:hotkey)
             write-host ("HOTKEY PRESSED") -ForegroundColor Cyan
         }
 
