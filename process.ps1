@@ -10,7 +10,7 @@
 # User vars - Can be edited by YOU
 $release       = 40                          # Seconds to press the hotkey again
 $webserverport = "8085"                      # Local port for temporarly webserver (must match with OAuth Redirect URL - eg. http://127.0.0.1:8084)
-$webserverwait = 120                         # Seconds; How long should the webserver listen to oauth request
+$webserverwait = 120                         # Seconds; How long should the webserver listen for an oauth request
 $interval      = 2                           # Time between requests to twitch for checking the lastest follower
 $pattern       = @()                         # Do not modify
 $pattern      += ".*(h|H)(o|O)(s|S)(s|S).*"  # Regular expression of a bad follower
