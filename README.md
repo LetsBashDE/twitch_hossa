@@ -9,8 +9,8 @@ expression matches to the user then a hotkey will be pressed by the script to hi
 After a defined time the hotkey will be pressed again to activate the source again.
 
 # Requirements
-Visual C++ Redistributable for Visual Studio 2015
-https://www.microsoft.com/en-US/download/details.aspx?id=48145
+- Visual C++ Redistributable for Visual Studio 2015
+  - https://www.microsoft.com/en-US/download/details.aspx?id=48145
 
 # How to run
 - You need to have 2 factor/mfa authentication enabled on your Twitch account. (All Affiliate should have this already)
