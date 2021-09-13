@@ -3,6 +3,10 @@ Some time ago the Bot Hoss00312 started to get on my nerves.
 Therefore I created a simple Powershell Script that works with the Twitch Helix API.
 Of cause it is Powershell - so it just works with Windows and I do not plan to port this script.
 
+# Videos
+- German: https://www.youtube.com/watch?v=tfht5v6GYQc
+- English: https://www.youtube.com/watch?v=WbfpptzvEuo
+
 # What it does
 Basicly the Script is checking continuesly the latest follower of your channel and if a regular
 expression matches to the user then a hotkey will be pressed by the script to hide your notification source in OBS.
