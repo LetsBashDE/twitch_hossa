@@ -378,7 +378,7 @@ function keypress {
         if($title.Length -gt 0){
             $silent = $wshell.AppActivate($title)
             $silent = $wshell.SendKeys(("{F"+$Global:hotkey+"}"))
-            write-host ("Action: Hotkey "+$Global:hotkey+" send to > "+$title) -ForegroundColor Cyan
+            write-host ("Action: Hotkey F"+$Global:hotkey+" send to > "+$title) -ForegroundColor Cyan
         }
     }
     
