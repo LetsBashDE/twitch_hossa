@@ -86,7 +86,7 @@ function init_testing {
     # Testing hotkeys by pressing 6 times
     write-host ""
     write-host ("Testing Hotkey...")
-    for ($i = 0; $i -lt 992; $i++){
+    for ($i = 0; $i -lt 2; $i++){
         keypress 
         sleep(3)
     }
