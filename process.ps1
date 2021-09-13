@@ -30,7 +30,14 @@ $channelid    = ""                           # Your channelid extracted by your 
 $latestfollow = ""                           # Your lastest follower on twitch
 $matchfollow  = ""                           # Compare value for change detection
 
-
+# Assemblies
+$getcurrentwindow = @'
+    [DllImport("user32.dll")]
+     public static extern IntPtr GetForegroundWindow();
+'@
+add-Type $getcurrentwindow -Name Utils -Namespace Win32
+add-type -AssemblyName microsoft.VisualBasic
+add-type -AssemblyName System.Windows.Forms
 
 function init_main {
     show_welcome
@@ -79,9 +86,9 @@ function init_testing {
     # Testing hotkeys by pressing 6 times
     write-host ""
     write-host ("Testing Hotkey...")
-    for ($i = 0; $i -lt 2; $i++){
+    for ($i = 0; $i -lt 992; $i++){
         keypress 
-        sleep(1)
+        sleep(3)
     }
     write-host ("Result: "+$i+" times pressed")
     write-host ("Testing Hotkey done")
@@ -370,21 +377,28 @@ function init_detector {
 }
 
 function keypress {
-    
+    # Retrive current window
+    $hwnd = [Win32.Utils]::GetForegroundWindow()
+    $currenttitle = (Get-Process | Where-Object { $_.mainWindowHandle -eq $hwnd }).id
+
+
     # Send keys to applications
-    $wshell = New-Object -ComObject wscript.shell;
     foreach($app in $global:application){
-        $title = (Get-Process | ? {$_.ProcessName -like $app}).mainwindowtitle
-        if($title.Length -gt 0){
-            $silent = $wshell.AppActivate($title)
-            $silent = $wshell.SendKeys(("{F"+$Global:hotkey+"}"))
-            write-host ("Action: Hotkey F"+$Global:hotkey+" send to > "+$title) -ForegroundColor Cyan
+        $titles = (Get-Process | ? {$_.ProcessName -like $app})
+        foreach($title in $titles){
+            [Microsoft.VisualBasic.Interaction]::AppActivate(($title.id))
+            [System.Windows.Forms.SendKeys]::SendWait(("{F"+$Global:hotkey+"}"))
+            write-host ("Action: Hotkey F"+$Global:hotkey+" send to > "+($title.mainwindowtitle)) -ForegroundColor Cyan
         }
     }
     
     # Throw error if no target is avalible
     if($title.Length -eq 0) {
           write-host ("Error: No application for hotkey found") -ForegroundColor yellow
+    }
+    else {
+        try {[Microsoft.VisualBasic.Interaction]::AppActivate($currenttitle) }
+	catch {}
     }
 }
 
