@@ -257,6 +257,7 @@ function init_token {
 
 function init_destroy_token {
 
+    # Prepare fresh start
     del ($Global:basedir + "token.txt")
     write-host "Error: Token seams to be invalid. Please restart application and refresh token."
 
@@ -264,6 +265,7 @@ function init_destroy_token {
 
 function init_destroy_channel {
 
+    # Prepare fresh start
     del ($Global:basedir + "channel.txt")
     del ($Global:basedir + "clientid.txt")
     write-host "Error: Channel seams to be invalid. Please restart application and reenter your channelname."
@@ -272,6 +274,7 @@ function init_destroy_channel {
 
 function init_kill {
 
+    # Come to an end
     write-host "Error: Could not retrive latest follower."
     sleep(5)
     exit
@@ -280,6 +283,8 @@ function init_kill {
 
 
 function init_channelid {
+    
+    # Prepare Webrequest
     $url = ("https://api.twitch.tv/helix/users?login="+$Global:channel)
 	$webquery = New-Object -ComObject "Msxml2.ServerXMLHTTP.6.0"
     $webquery.SetOption(2, 'objHTTP.GetOption(2) - SXH_SERVER_CERT_IGNORE_ALL_SERVER_ERRORS')
@@ -293,12 +298,14 @@ function init_channelid {
     $webquery.SetTimeouts($timeout,$timeout,$timeout,$timeout)
     $webquery.send()
     
+    # Extract channel id
     if($webquery.statusText -like "*OK*"){
         if($webquery.responseText -like ("*"+'"id":"'+"*")){
             $Global:channelid = (((($webquery.responseText) -split "id`":`"")[1]) -split "`"")[0]
         }
     }
 
+    # Start fresh again on error
     if(($Global:channelid).Length -eq 0) {
         init_destroy_token
         init_destroy_channel
@@ -307,6 +314,8 @@ function init_channelid {
 }
 
 function init_follower {
+
+    # Prepare Webrequest
     $url = ("https://api.twitch.tv/helix/users/follows?to_id="+$Global:channelid)
 	$webquery = New-Object -ComObject "Msxml2.ServerXMLHTTP.6.0"
     $webquery.SetOption(2, 'objHTTP.GetOption(2) - SXH_SERVER_CERT_IGNORE_ALL_SERVER_ERRORS')
@@ -318,18 +327,25 @@ function init_follower {
 	$webquery.SetRequestHeader("If-Modified-Since", "Sat, 1 Jan 2000 00:00:00 GMT")
     [long]$timeout = 2000
     $webquery.SetTimeouts($timeout,$timeout,$timeout,$timeout)
-    $webquery.send()
     
+    # Silently drop errors if twitch does not respond
+    try { 
+    	$webquery.send()
+    } catch {}
+    
+    # Extract latest follower
     if($webquery.statusText -like "*OK*"){
         if($webquery.responseText -like ("*"+'"from_name":"'+"*")){
             $Global:latestfollow = (((($webquery.responseText) -split "from_name`":`"")[1]) -split "`"")[0]
         }
     }
 
+    # If first request failes than exit
     if(($Global:latestfollow).Length -eq 0) {
         init_kill
     }
 
+    # Remember latest follow next time
     if(($Global:matchfollow).Length -eq 0) {
          $Global:matchfollow = $Global:latestfollow
     }
