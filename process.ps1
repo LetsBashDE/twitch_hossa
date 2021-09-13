@@ -15,9 +15,6 @@ $interval      = 2                           # Time between requests to twitch f
 $pattern       = @()                         # Do not modify
 $pattern      += ".*(h|H)(o|O)(s|S)(s|S).*"  # Regular expression of a bad follower
 $pattern      += ".*0312.*"                  # Regular expression of a bad follower
-$application   = @()                         # Do not modify
-$application  += "Streamlabs OBS"            # Applicationname
-$application  += "OBS64"                     # Applicationname
 
 
 # Runtime vars - Modified by the process - Should you NOT edit
@@ -30,14 +27,6 @@ $channelid    = ""                           # Your channelid extracted by your 
 $latestfollow = ""                           # Your lastest follower on twitch
 $matchfollow  = ""                           # Compare value for change detection
 
-# Assemblies
-$getcurrentwindow = @'
-    [DllImport("user32.dll")]
-     public static extern IntPtr GetForegroundWindow();
-'@
-add-Type $getcurrentwindow -Name Utils -Namespace Win32
-add-type -AssemblyName microsoft.VisualBasic
-add-type -AssemblyName System.Windows.Forms
 
 function init_main {
     show_welcome
@@ -86,8 +75,8 @@ function init_testing {
     # Testing hotkeys by pressing 6 times
     write-host ""
     write-host ("Testing Hotkey...")
-    for ($i = 0; $i -lt 2; $i++){
-        keypress 
+    for ($i = 0; $i -lt 4; $i++){
+        keypress
         sleep(3)
     }
     write-host ("Result: "+$i+" times pressed")
@@ -368,7 +357,7 @@ function init_detector {
             keypress 
 	    write-host ("Wait "+$Global:release+" seconds for release") -ForegroundColor Cyan
             sleep($Global:release)
-            keypress 
+            keypress
         }
 
     }
@@ -377,29 +366,8 @@ function init_detector {
 }
 
 function keypress {
-    # Retrive current window
-    $hwnd = [Win32.Utils]::GetForegroundWindow()
-    $currenttitle = (Get-Process | Where-Object { $_.mainWindowHandle -eq $hwnd }).id
-
-
-    # Send keys to applications
-    foreach($app in $global:application){
-        $titles = (Get-Process | ? {$_.ProcessName -like $app})
-        foreach($title in $titles){
-            [Microsoft.VisualBasic.Interaction]::AppActivate(($title.id))
-            [System.Windows.Forms.SendKeys]::SendWait(("{F"+$Global:hotkey+"}"))
-            write-host ("Action: Hotkey F"+$Global:hotkey+" send to > "+($title.mainwindowtitle)) -ForegroundColor Cyan
-        }
-    }
-    
-    # Throw error if no target is avalible
-    if($title.Length -eq 0) {
-          write-host ("Error: No application for hotkey found") -ForegroundColor yellow
-    }
-    else {
-        try {[Microsoft.VisualBasic.Interaction]::AppActivate($currenttitle) }
-	catch {}
-    }
+    write-host ("Action: Hotkey F"+$Global:hotkey+" send") -ForegroundColor Cyan
+    ./keypress32.exe $Global:hotkey
 }
 
 init_main
