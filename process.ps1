@@ -188,6 +188,7 @@ function init_token {
 
     # Trigger emergency webserver close first
     start-process ("http://127.0.0.1:"+$Global:webserverport+"/emergency/")
+    sleep(1)
 
     # Start Oauth request to twitch
     start-process ("https://id.twitch.tv/oauth2/authorize?client_id="+$Global:clientid+"&response_type=token&redirect_uri=http://127.0.0.1:"+$Global:webserverport+"&scope=user:read:follows")
