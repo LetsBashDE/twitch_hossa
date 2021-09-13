@@ -13,27 +13,12 @@ Just Windows. Works maybe from Windows 7 up to Windows 11 - Tested with Windows 
 
 # How to run
 - You need to have 2 factor/mfa authentication enabled on your Twitch account. (All Affiliate should have this already)
-- Place the init.cmd and process.ps1 into the same directory of your choice.
-- Open the process.ps1 in an editor of your choice
-  - Replace 'F9' in the line '$hotkey = "{F9}"' with a Hotkey of your choice (you can also leave 'F9' if you are fine with it)
-  - Replace '30' in the line '$release = 30' with the amount of seconds until the hotkey should be pressed again to re-enable your Alertbox.
-  - Replace 'yourchannelname' in the line '$channel = "yourchannelname"' with the name of your twitch channel (please use lower case)
-  - Modify '8082' in the line '$webserverport = "8082"' if an application uses the Network TCP Port 8082  on your computer (if you are not sure leave it)
-  - Modify '2' in the line '$interval = 2' if you want to audjust the update time in seconds of your followers ('2' means that you followers will be checked every 2 seconds)
-  - Modify the array in the line '$pattern = @("^hos(s|t).*",".*0312.*")' to add other or more regular expressions. Shoud a expression matches to a follower then the hotkeys will be pressed.
-    - If you are satisfied just by disable Hoss follows you can leave it as it is
-    - A good source for regex tests is regex101.com
-- Start the init.cmd and follow the "instructions"
-  - When you first run the init.cmd you will be redirected to dev.twitch.tv with your default browser
-    - You have to create a new extention
-    - Provide a name to the extention
-    - Go to advanced settings and provide a OAuth Redirect URL: http://127.0.0.1:8082
-      - If you defined in process.ps1 on line '$webserverport = "8082"' nother port than 8082 you must change the URL to the port (eg. for 8083 http://127.0.0.1:8083)
-    - Save the extention
-    - Look of for the 'Twitch-API-Client-ID' in your newly created extention and provide the ID to the powershell console
-  - Next you will be redirected to the twitch oauth page to gain access to your latest followers
-    - In the background a second website opens: This is a failsave to close the local webserver that is running on your defined TCP Port (eg. 8082)
-    - Therefore: You have 60 seconds to accept the twitch oauth page to retrive the token and gain access to your follower list
+- Place the init.cmd, process.ps1 and keypress32.exe into the same directory of your choice.
+- Start the init.cmd file and follow the assistant
+  - Define the F1-12 Key as a Hotkey
+  - Enter your channel name
+  - Create a new extention with a Name and a defined OAuth Redirect URL
+  - Let the script authenticate and get the token
 - Next time you run the init.cmd all settings will be loaded automaticly
 - Setup your Alertbox with a delay of 5 seconds
   - On Streamlabs you can change this on the website for every alert
