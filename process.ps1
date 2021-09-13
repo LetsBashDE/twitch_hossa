@@ -15,6 +15,9 @@ $interval      = 2                           # Time between requests to twitch f
 $pattern       = @()                         # Do not modify
 $pattern      += ".*(h|H)(o|O)(s|S)(s|S).*"  # Regular expression of a bad follower
 $pattern      += ".*0312.*"                  # Regular expression of a bad follower
+$application   = @()                         # Do not modify
+$application  += "Streamlabs OBS"            # Applicationname
+$application  += "OBS64"                     # Applicationname
 
 
 # Runtime vars - Modified by the process - Should you NOT edit
@@ -28,8 +31,6 @@ $latestfollow = ""                           # Your lastest follower on twitch
 $matchfollow  = ""                           # Compare value for change detection
 
 
-# Load Assemblys once
-Add-Type -AssemblyName System.Windows.Forms
 
 function init_main {
     show_welcome
@@ -78,23 +79,11 @@ function init_testing {
     # Testing hotkeys by pressing 6 times
     write-host ""
     write-host ("Testing Hotkey...")
-    [System.Windows.Forms.SendKeys]::SendWait(("{F"+$Global:hotkey+"}"))
-    write-host ("        pressed 1 times")
-    sleep(1)
-    [System.Windows.Forms.SendKeys]::SendWait(("{F"+$Global:hotkey+"}"))
-    write-host ("        pressed 2 times")
-    sleep(1)
-    [System.Windows.Forms.SendKeys]::SendWait(("{F"+$Global:hotkey+"}"))
-    write-host ("        pressed 3 times")
-    sleep(1)
-    [System.Windows.Forms.SendKeys]::SendWait(("{F"+$Global:hotkey+"}"))
-    write-host ("        pressed 4 times")
-    sleep(1)
-    [System.Windows.Forms.SendKeys]::SendWait(("{F"+$Global:hotkey+"}"))
-    write-host ("        pressed 5 times")
-    sleep(1)
-    [System.Windows.Forms.SendKeys]::SendWait(("{F"+$Global:hotkey+"}"))
-    write-host ("        pressed 6 times")
+    for ($i = 0; $i -lt 2; $i++){
+        keypress 
+        sleep(1)
+    }
+    write-host ("Result: "+$i+" times pressed")
     write-host ("Testing Hotkey done")
 }
 
@@ -369,18 +358,34 @@ function init_detector {
 	# Commence action if bad guy has been detected
         if(($Global:latestfollow) -match $expression) {
             write-host ("Follower "+$Global:latestfollow+" looks like a bad guy!") -ForegroundColor Yellow
-	    [System.Windows.Forms.SendKeys]::SendWait(("{F"+$Global:hotkey+"}"))
-            write-host ("Action: Hotkey "+$Global:hotkey+" pressed") -ForegroundColor Cyan
+            keypress 
 	    write-host ("Wait "+$Global:release+" seconds for release") -ForegroundColor Cyan
             sleep($Global:release)
-            [System.Windows.Forms.SendKeys]::SendWait(("{F"+$Global:hotkey+"}"))
-            write-host ("Action: Hotkey "+$Global:hotkey+" pressed") -ForegroundColor Cyan
+            keypress 
         }
 
     }
     
     write-host ""
+}
 
+function keypress {
+    
+    # Send keys to applications
+    $wshell = New-Object -ComObject wscript.shell;
+    foreach($app in $global:application){
+        $title = (Get-Process | ? {$_.ProcessName -like $app}).mainwindowtitle
+        if($title.Length -gt 0){
+            $silent = $wshell.AppActivate($title)
+            $silent = $wshell.SendKeys(("{F"+$Global:hotkey+"}"))
+            write-host ("Action: Hotkey "+$Global:hotkey+" send to > "+$title) -ForegroundColor Cyan
+        }
+    }
+    
+    # Throw error if no target is avalible
+    if($title.Length -eq 0) {
+          write-host ("Error: No application for hotkey found") -ForegroundColor yellow
+    }
 }
 
 init_main
