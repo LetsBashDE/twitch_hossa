@@ -375,6 +375,7 @@ function init_detector {
 	    write-host ("Wait "+$Global:release+" seconds for release") -ForegroundColor Cyan
             sleep($Global:release)
             keypress
+	    break
         }
 
     }
