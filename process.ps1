@@ -366,8 +366,15 @@ function init_detector {
 }
 
 function keypress {
+    
+    # Execute Keypress
     write-host ("Action: Hotkey F"+$Global:hotkey+" send") -ForegroundColor Cyan
-    ./keypress32.exe $Global:hotkey
+    if([Environment]::Is64BitOperatingSystem){
+         ./keypress64.exe $Global:hotkey
+    }
+    else {
+         ./keypress32.exe $Global:hotkey
+    }
 }
 
 init_main
