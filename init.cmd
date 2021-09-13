@@ -2,18 +2,20 @@
 rem This little thing must be in the same directory as the powershell script
 rem It will execute the Powershellscript for you with the pypass security settings
 
-echo Start elevating as an Administrator
-echo This is needed because hotkeys can only send global from an administrative application
+goto normal
 
 rem Unevelevated
-if "%1"=="psx" goto psx
-powershell.exe -executionpolicy bypass -nologo -noprofile -command "start-process init.cmd -verb runas -argument 'psx' -WorkingDirectory '%~dp0'"
+if "%1"=="elevated" goto elevated
+rem Start elevating as an Administrator
+:elevate
+powershell.exe -executionpolicy bypass -nologo -noprofile -command "start-process init.cmd -verb runas -argument 'elevated' -WorkingDirectory '%~dp0'"
 goto end
 
 rem Elevated
-:psx
+:elevated
 cd "%~dp0"
+:normal
 powershell.exe -executionpolicy bypass -nologo -noprofile -file process.ps1
-pause
+goto end
 
 :end
