@@ -10,12 +10,12 @@ After a defined time the hotkey will be pressed again to activate the source aga
 
 # Requirements
 - Visual C++ Redistributable for Visual Studio
-  - 32-Bit: https://aka.ms/vs/16/release/vc_redist.x86.exe
-  - 64-Bit: https://aka.ms/vs/16/release/vc_redist.x64.exe
+  - For 32-Bit Operating Systems: https://aka.ms/vs/16/release/vc_redist.x86.exe
+  - For 64-Bit Operating Systems: https://aka.ms/vs/16/release/vc_redist.x64.exe
   
 # How to run
 - You need to have 2 factor/mfa authentication enabled on your Twitch account. (All Affiliate should have this already)
-- Place the init.cmd, process.ps1 and keypress32.exe into the same directory of your choice.
+- Place the init.cmd, process.ps1, keypress32.exe and keypress64.exe into the same directory of your choice.
 - Start the init.cmd file and follow the assistant
   - Define the F1-12 Key as a Hotkey
   - Enter your channel name
