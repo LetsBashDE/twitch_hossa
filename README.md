@@ -1,6 +1,3 @@
-# Virus Found?
-Well today I wanted to extend the functionality for this repository, but it turns out that the keypress32.exe was detected as a virus from Windows Defender. Well it says that the keypress32.exe is capable of executing commands from an attacker, but this is very missleading since this is tool that acts as a wrapper for powershell to initiate a systemwide hotkey press. Powershell is with the command sendwait and send sendkey only capable to send a keypress to a application that has focus. I experimented with this and the result was awful. When you are in the game and the script detects a bad follower than the focus had to moved from your game to obs to initiate the trigger. Some games could not be adressed and so the focus stays on obs. Well this is the reason why I compiled the keypress*.exe files with very little knowledge of c++ with the help of stackoverflow.com. I will recreate the keypress*.exe files with a seperate .exe for each F-Key to eliminate the need of having a parameter for a key. Maybe this triggers the "can be used from an attack" detection.
-
 # Whats is this
 Some time ago the Bot Hoss00312 started to get on my nerves.
 Therefore I created a simple Powershell Script that works with the Twitch Helix API.
