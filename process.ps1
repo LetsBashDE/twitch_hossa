@@ -14,7 +14,7 @@ $webserverwait = 120                         # Seconds; How long should the webs
 $interval      = 2                           # Time between requests to twitch for checking the lastest follower
 $pattern       = @()                         # Do not modify
 $pattern      += ".*(h|H)(o|O)(s|S)(s|S).*"  # Regular expression of a bad follower
-$pattern      += ".*(0|o|O)312.*"                  # Regular expression of a bad follower
+$pattern      += ".*(0|o|O)312.*"            # Regular expression of a bad follower
 
 
 # Runtime vars - Modified by the process - Should you NOT edit
