@@ -555,18 +555,18 @@ function keypress {
     
     # Execute Keypress
     switch ($Global:hotkey) {
-        1 { [HotkeySender]::SendScanCode(0x70) }
-        2 { [HotkeySender]::SendScanCode(0x71) }
-        3 { [HotkeySender]::SendScanCode(0x72) }
-        4 { [HotkeySender]::SendScanCode(0x73) }
-        5 { [HotkeySender]::SendScanCode(0x74) }
-        6 { [HotkeySender]::SendScanCode(0x75) }
-        7 { [HotkeySender]::SendScanCode(0x76) }
-        8 { [HotkeySender]::SendScanCode(0x77) }
-        9 { [HotkeySender]::SendScanCode(0x78) }
-        10 { [HotkeySender]::SendScanCode(0x79) }
-        11 { [HotkeySender]::SendScanCode(0x7A) }
-        12 { [HotkeySender]::SendScanCode(0x7B) }
+        1 { [HotkeySender]::SendScanCode(0x70); break }
+        2 { [HotkeySender]::SendScanCode(0x71); break }
+        3 { [HotkeySender]::SendScanCode(0x72); break }
+        4 { [HotkeySender]::SendScanCode(0x73); break }
+        5 { [HotkeySender]::SendScanCode(0x74); break }
+        6 { [HotkeySender]::SendScanCode(0x75); break }
+        7 { [HotkeySender]::SendScanCode(0x76); break }
+        8 { [HotkeySender]::SendScanCode(0x77); break }
+        9 { [HotkeySender]::SendScanCode(0x78); break }
+        10 { [HotkeySender]::SendScanCode(0x79); break }
+        11 { [HotkeySender]::SendScanCode(0x7A); break }
+        12 { [HotkeySender]::SendScanCode(0x7B); break }
     }
 
 }
