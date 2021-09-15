@@ -13,6 +13,7 @@ expression matches to the user then a hotkey will be pressed by the script to hi
 After a defined time the hotkey will be pressed again to activate the source again.
 
 # Requirements
+Since we made a huge change to our code you may don´t need any of this, but just in case I leave the links down below.
 - Visual C++ Redistributable for Visual Studio
   - For 32-Bit Operating Systems: https://aka.ms/vs/16/release/vc_redist.x86.exe
   - For 64-Bit Operating Systems: https://aka.ms/vs/16/release/vc_redist.x64.exe
