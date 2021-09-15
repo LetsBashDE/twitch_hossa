@@ -1,3 +1,7 @@
+# Important
+twitch_hossa is finalized and development will move on to "twtich_antibotalert" at https://github.com/LetsBashDE/twitch_antibotalert.
+The new Reporitory twtich_antibotalert will cover everything from twitch_hossa and additionally include dynamicly Known Bots from twitchinsight.net.
+
 # Whats is this
 Some time ago the Bot Hoss00312 started to get on my nerves.
 Therefore I created a simple Powershell Script that works with the Twitch Helix API.
