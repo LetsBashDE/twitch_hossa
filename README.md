@@ -35,7 +35,7 @@ Since we made a huge change to our code you may don´t need any of this, but jus
   - On Streamlabs you can change this on the website for every alert
 
 # When it failes or start fresh
-If something goes wrong you can delete the channel.txt, clientid.txt and token.txt files that will be placed in the same directory as init.cmd and process.ps1.
+If something goes wrong you can delete the *.txt files that will be placed in the same directory as init.cmd and process.ps1.
 
 # Things you should not do
 You must not run this as an Administrator because of the path "execute at folder" definition of windows. Programms that will be run as Administrator starts usualy at %winwir%\system32.
