@@ -20,7 +20,7 @@ Since we made a huge change to our code you may don´t need any of this, but jus
   
 # How to run
 - You need to have 2 factor/mfa authentication enabled on your Twitch account. (All Affiliate should have this already)
-- Place the init.cmd, process.ps1, keypress32.exe and keypress64.exe into the same directory of your choice.
+- Place the init.cmd and process.ps1 into the same directory of your choice.
 - Start the init.cmd file and follow the assistant
   - Define the F1-12 Key as a Hotkey
   - Enter your channel name
