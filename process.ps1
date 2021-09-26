@@ -15,6 +15,7 @@ $interval      = 2                           # Time between requests to twitch f
 $pattern       = @()                         # Do not modify
 $pattern      += ".*(h|H)(o|O)(s|S)(s|S).*"  # Regular expression of a bad follower
 $pattern      += ".*(0|o|O)312.*"            # Regular expression of a bad follower
+$pattern      += ".*(h|o|s|8|0|1|2).*(h|o|s|8|0|1|2).*(h|o|s|8|0|1|2).*(h|o|s|8|0|1|2).*(h|o|s|8|0|1|2).*(h|o|s|8|0|1|2).*(h|o|s|8|0|1|2).*(h|o|s|8|0|1|2).*"            # Regular expression of a bad follower
 
 
 # Runtime vars - Modified by the process - Should you NOT edit
